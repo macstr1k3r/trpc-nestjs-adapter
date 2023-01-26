@@ -1,22 +1,34 @@
 {
   "name": "trpc-nestjs-adapter",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.1",
+  "description": "TRPC adapter for NestJS",
+  "keywords": [
+    "nestjs",
+    "nest",
+    "trpc",
+    "adapter"
+  ],
+  "author": {
+    "name": "Darko Stojkovski",
+    "email": "dar3.st@gmail.com"
+  },
   "license": "MIT",
-  "private": true,
-  "main": "./dist/trpc/trpc.module.js",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
   "exports": {
-    "./TrpcModule": {
-      "types": "./dist/trpc/trpc.module.d.ts",
-      "import": "./dist/trpc/trpc.module.js",
-      "require": "./dist/trpc/trpc.module.js"
-    }
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.js",
+      "require": "./dist/lib/index.js"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
     "lint": "eslint --ext .ts src/"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@nestjs/common": "^9.2.1",
     "@nestjs/core": "^9.2.1",
     "@nestjs/platform-express": "^9.2.1",
@@ -24,6 +36,7 @@
     "reflect-metadata": "^0.1.12",
     "rxjs": "^7.1.0"
   },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
@@ -34,5 +47,8 @@
     "eslint-plugin-import": "^2.25.2",
     "nodemon": "^2.0.20",
     "typescript": "^4.9.4"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

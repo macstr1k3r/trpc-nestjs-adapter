@@ -17,9 +17,9 @@ export interface BuildTrpcNestMiddlewareOptions {
 /**
  * Builds an Express middleware that handles all trpc requests.
  *
- * The middleware will adds a `resolve` property to the context
+ * The middleware will add a `resolveNestDependency` property to the context
  *
- * `resolve` is a function that can be used to resolve NestJS providers
+ * `resolveNestDependency` is a function that can be used to resolve NestJS providers
  *
  * @param req Express request object
  * @param moduleRef The moduleRef from the NestJS app
