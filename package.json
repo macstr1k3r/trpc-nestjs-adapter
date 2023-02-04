@@ -1,6 +1,6 @@
 {
   "name": "trpc-nestjs-adapter",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "TRPC adapter for NestJS",
   "keywords": [
     "nestjs",
