@@ -39,7 +39,6 @@ export class TrpcModule implements OnModuleInit {
   }
 
   onModuleInit() {
-    this.moduleRef.create
     attachTrpcToExpressApp({
       moduleRef: this.moduleRef,
       expressApp: this.httpAdapterHost.httpAdapter.getInstance(),
