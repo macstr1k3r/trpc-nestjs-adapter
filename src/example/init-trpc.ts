@@ -18,7 +18,6 @@ const publicProcedure = trpc.procedure;
 export const appRouter = router({
   something: publicProcedure.query(async ({ ctx }) => {
     const service = await ctx.resolveNestDependency(AService);
-    console.log({ service });
     return service.smth();
   }),
 });

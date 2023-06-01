@@ -36,6 +36,8 @@ export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: Bu
         const userProvidedContext = createContext();
 
         return {
+          req,
+          res,
           ...userProvidedContext,
           resolveNestDependency,
         };
