@@ -1,11 +1,24 @@
-import { NestExpressApplication } from '@nestjs/platform-express';
+import type { NestExpressApplication } from '@nestjs/platform-express';
+import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
+import type { FastifyInstance } from 'fastify';
 import { TrpcModuleOptions } from './trpc-module-options.type';
+import {
+  buildTrpcNestMiddleware,
+  BuildTrpcNestMiddlewareOptions,
+  extendTrpcContext,
+} from './build-trpc-nest-middleware';
 
-import { buildTrpcNestMiddleware, BuildTrpcNestMiddlewareOptions } from './build-trpc-nest-middleware';
+type ExpressApp = {
+  expressApp?: NestExpressApplication,
+  fastifyApp?: never,
+} & TrpcModuleOptions & BuildTrpcNestMiddlewareOptions;
 
-interface Options extends TrpcModuleOptions, BuildTrpcNestMiddlewareOptions {
-  expressApp: NestExpressApplication,
-}
+type FastifyApp = {
+  expressApp?: never,
+  fastifyApp?: FastifyInstance,
+} & TrpcModuleOptions & BuildTrpcNestMiddlewareOptions;
+
+type Options = ExpressApp | FastifyApp;
 
 /**
  * Attaches a TRPC router to your nestExpressApp
@@ -20,5 +33,23 @@ export function attachTrpcToExpressApp({
     createContext,
   });
 
-  expressApp.use(path, trpcNestMiddleware);
+  expressApp?.use(path, trpcNestMiddleware);
+}
+
+/**
+ * Attaches a TRPC router to your fastifyApp
+ * @param options: Options
+ */
+export function attachTrpcToFastifyApp({
+  router, moduleRef, createContext, path, fastifyApp,
+}: Options): void {
+  fastifyApp?.removeContentTypeParser(['application/json']);
+
+  fastifyApp?.register(fastifyTRPCPlugin, {
+    prefix: path,
+    trpcOptions: {
+      router,
+      createContext: extendTrpcContext(createContext, moduleRef),
+    },
+  });
 }

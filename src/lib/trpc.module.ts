@@ -2,7 +2,7 @@ import {
   DynamicModule, Inject, Module, OnModuleInit,
 } from '@nestjs/common';
 import { HttpAdapterHost, ModuleRef } from '@nestjs/core';
-import { attachTrpcToExpressApp } from './attach-trpc-to-express-app';
+import { attachTrpcToFastifyApp } from './attach-trpc-to-express-app';
 import { TRPC_CREATE_CONTEXT_TOKEN, TRPC_PATH_TOKEN, TRPC_ROUTER_TOKEN } from './tokens';
 import { TrpcModuleOptions } from './trpc-module-options.type';
 
@@ -40,9 +40,9 @@ export class TrpcModule implements OnModuleInit {
   }
 
   onModuleInit() {
-    attachTrpcToExpressApp({
+    attachTrpcToFastifyApp({
       moduleRef: this.moduleRef,
-      expressApp: this.httpAdapterHost.httpAdapter.getInstance(),
+      fastifyApp: this.httpAdapterHost.httpAdapter.getInstance(),
       path: this.path,
       createContext: this.createContext,
       router: this.router,

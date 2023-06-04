@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TrpcModule } from '../lib/trpc.module';
 import { AModule } from './domain-b/a.module';
-import { appRouter } from './init-trpc';
+import { appRouter, createContext } from './init-trpc';
 
 @Module({
   imports: [
@@ -9,7 +9,7 @@ import { appRouter } from './init-trpc';
     TrpcModule.forRoot({
       path: '/trpc',
       router: appRouter,
-      createContext: () => ({}),
+      createContext,
     }),
   ],
 })
