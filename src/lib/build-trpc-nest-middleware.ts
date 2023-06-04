@@ -1,6 +1,7 @@
 import { createHTTPHandler } from '@trpc/server/adapters/standalone';
 import { ModuleRef } from '@nestjs/core';
 import { AnyRouter } from '@trpc/server';
+import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
 import { buildNestResolver } from './build-nest-resolver';
 
 export interface BuildTrpcNestMiddlewareOptions {
@@ -43,5 +44,18 @@ export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: Bu
         };
       },
     })(req, res);
+  };
+}
+
+export function extendTrpcContext(origContext: () => any, moduleRef: ModuleRef) {
+  return function createContext({ req, res }: CreateFastifyContextOptions) {
+    const { resolveNestDependency } = buildNestResolver(req, moduleRef);
+
+    return {
+      ...origContext(),
+      req,
+      res,
+      resolveNestDependency,
+    };
   };
 }
