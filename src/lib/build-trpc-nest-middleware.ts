@@ -47,12 +47,12 @@ export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: Bu
   };
 }
 
-export function extendTrpcContext(origContext: () => any, moduleRef: ModuleRef) {
+export function extendTrpcContext(origContext: (args: CreateFastifyContextOptions) => any, moduleRef: ModuleRef) {
   return function createContext({ req, res }: CreateFastifyContextOptions) {
     const { resolveNestDependency } = buildNestResolver(req, moduleRef);
 
     return {
-      ...origContext(),
+      ...origContext({ req, res }),
       req,
       res,
       resolveNestDependency,
