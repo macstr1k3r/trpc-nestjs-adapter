@@ -21,6 +21,13 @@ export function buildNestResolver(req: any, moduleRef: ModuleRef) {
     // const requestScopedService = await ctx.resolve(RequestScopedService);
 
     return {
+        /**
+         * Resolves any NestJS dependency from your project.
+         *
+         * Return type of this function is automatically inferred.
+         *
+         * Returns a promise which resolves to the dependency.
+         */
         resolveNestDependency,
         /**
          *
@@ -28,11 +35,20 @@ export function buildNestResolver(req: any, moduleRef: ModuleRef) {
          *
          * All subsequent calls to `resolveNestDependency` will resolve dependencies from the new subtree
          * `REQUEST` scoped dependencies will be re-created.
+         *
+         * use-case: testing
          */
         resetDiSubtree: () => {
             contextId = ContextIdFactory.create();
             moduleRef.registerRequestByContextId(req, contextId);
         },
+        /**
+         * used to attach anything to the request object
+         *
+         * This is useful if you want to have something specific to the trpc request and later access it in a NestJS provider
+         *
+         * examples: req scoped prisma client, req scoped logger, etc...
+         */
         attachToReqObject: (_trpc_nest_adapter_meta: Record<string, any>) => {
             req._trpc_nest_adapter_meta = _trpc_nest_adapter_meta;
         },
