@@ -28,7 +28,7 @@ export interface BuildTrpcNestMiddlewareOptions {
  */
 export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: BuildTrpcNestMiddlewareOptions) {
   return function trpcNestMiddleware(req: any, res: any) {
-    const { resolveNestDependency } = buildNestResolver(req, moduleRef);
+    const { resolveNestDependency, attachToReqObject, resetDiSubtree } = buildNestResolver(req, moduleRef);
 
     return createHTTPHandler({
       router,
@@ -38,6 +38,8 @@ export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: Bu
         return {
           ...userProvidedContext,
           resolveNestDependency,
+          attachToReqObject,
+          resetDiSubtree
         };
       },
     })(req, res);

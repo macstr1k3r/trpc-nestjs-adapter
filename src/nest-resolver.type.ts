@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 interface Type<T = any> extends Function {
-  new(...args: any[]): T;
+  new (...args: any[]): T;
 }
 
 export interface NestResolver {
@@ -11,5 +11,9 @@ export interface NestResolver {
    *
    * Returns a promise which resolves to the dependency.
    */
-  resolveNestDependency: <TInput = any, TResult = TInput>(typeOrToken: Type<TInput> | Function | string | symbol) => Promise<TResult>;
+  resolveNestDependency: <TInput = any, TResult = TInput>(
+    typeOrToken: Type<TInput> | Function | string | symbol,
+  ) => Promise<TResult>;
+  attachToReqObject: (anything: Record<string, any>) => void;
+  resetDiSubtree: () => void;
 }
