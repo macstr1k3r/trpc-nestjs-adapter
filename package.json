@@ -1,60 +1,64 @@
 {
-  "name": "trpc-nestjs-adapter",
-  "version": "1.0.0-alpha.11",
-  "description": "TRPC adapter for NestJS",
-  "keywords": [
-    "nestjs",
-    "nest",
-    "trpc",
-    "adapter"
-  ],
-  "author": {
-    "name": "Darko Stojkovski",
-    "email": "dar3.st@gmail.com"
-  },
-  "license": "MIT",
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/lib/index.d.ts",
-      "import": "./dist/lib/index.js",
-      "require": "./dist/lib/index.js"
+    "name": "trpc-nestjs-adapter",
+    "version": "1.0.0-alpha.11",
+    "description": "TRPC adapter for NestJS",
+    "keywords": [
+        "nestjs",
+        "nest",
+        "trpc",
+        "adapter"
+    ],
+    "author": {
+        "name": "Darko Stojkovski",
+        "email": "dar3.st@gmail.com"
     },
-    "./package.json": "./package.json"
-  },
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w",
-    "lint": "eslint --ext .ts src/"
-  },
-  "peerDependencies": {
-    "@nestjs/common": "^9.2.1",
-    "@nestjs/core": "^9.2.1",
-    "@nestjs/platform-express": "^9.2.1",
-    "@trpc/server": "~10.14.0",
-    "reflect-metadata": "^0.1.12",
-    "rxjs": "^7.1.0"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@nestjs/common": "^9.2.1",
-    "@nestjs/core": "^9.2.1",
-    "@nestjs/platform-express": "^9.2.1",
-    "@trpc/server": "~10.14.0",
-    "reflect-metadata": "^0.1.12",
-    "rxjs": "^7.1.0",
-    "@types/node": "^16.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@typescript-eslint/parser": "^5.48.2",
-    "eslint": "^8.2.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.4"
-  },
-  "files": [
-    "dist"
-  ]
+    "license": "MIT",
+    "main": "./dist/lib/index.js",
+    "types": "./dist/lib/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/lib/index.d.ts",
+            "import": "./dist/lib/index.js",
+            "require": "./dist/lib/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc -w",
+        "prelint": "prettier --check src/",
+        "lint": "eslint --ext .ts src/",
+        "lint:fix": "prettier --write src/; eslint --ext .ts src/ --fix"
+    },
+    "peerDependencies": {
+        "@nestjs/common": "^9.2.1",
+        "@nestjs/core": "^9.2.1",
+        "@nestjs/platform-express": "^9.2.1",
+        "@trpc/server": "~10.14.0",
+        "reflect-metadata": "^0.1.12",
+        "rxjs": "^7.1.0"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@nestjs/common": "^9.2.1",
+        "@nestjs/core": "^9.2.1",
+        "@nestjs/platform-express": "^9.2.1",
+        "@trpc/server": "~10.14.0",
+        "@types/node": "^16.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.48.2",
+        "@typescript-eslint/parser": "^5.48.2",
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb-base": "15.0.0",
+        "eslint-config-airbnb-typescript": "^17.0.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-import": "^2.25.2",
+        "nodemon": "^2.0.20",
+        "prettier": "^3.0.3",
+        "reflect-metadata": "^0.1.12",
+        "rxjs": "^7.1.0",
+        "typescript": "^4.9.4"
+    },
+    "files": [
+        "dist"
+    ]
 }

@@ -1,17 +1,17 @@
-import { createHTTPHandler } from '@trpc/server/adapters/standalone';
-import { ModuleRef } from '@nestjs/core';
-import { AnyRouter } from '@trpc/server';
-import { buildNestResolver } from './build-nest-resolver';
+import { createHTTPHandler } from "@trpc/server/adapters/standalone";
+import { ModuleRef } from "@nestjs/core";
+import { AnyRouter } from "@trpc/server";
+import { buildNestResolver } from "./build-nest-resolver";
 
 export interface BuildTrpcNestMiddlewareOptions {
-  /** Your TRPC Router */
-  router: AnyRouter;
+    /** Your TRPC Router */
+    router: AnyRouter;
 
-  /** The NestJS ModuleRef */
-  moduleRef: ModuleRef;
+    /** The NestJS ModuleRef */
+    moduleRef: ModuleRef;
 
-  /** A function that returns the context object as used with TRPC */
-  createContext: () => any;
+    /** A function that returns the context object as used with TRPC */
+    createContext: () => any;
 }
 
 /**
@@ -27,21 +27,21 @@ export interface BuildTrpcNestMiddlewareOptions {
  * @returns Express middleware which is capable of handling trpc requests
  */
 export function buildTrpcNestMiddleware({ moduleRef, router, createContext }: BuildTrpcNestMiddlewareOptions) {
-  return function trpcNestMiddleware(req: any, res: any) {
-    const { resolveNestDependency, attachToReqObject, resetDiSubtree } = buildNestResolver(req, moduleRef);
+    return function trpcNestMiddleware(req: any, res: any) {
+        const { resolveNestDependency, attachToReqObject, resetDiSubtree } = buildNestResolver(req, moduleRef);
 
-    return createHTTPHandler({
-      router,
-      createContext: () => {
-        const userProvidedContext = createContext();
+        return createHTTPHandler({
+            router,
+            createContext: () => {
+                const userProvidedContext = createContext();
 
-        return {
-          ...userProvidedContext,
-          resolveNestDependency,
-          attachToReqObject,
-          resetDiSubtree
-        };
-      },
-    })(req, res);
-  };
+                return {
+                    ...userProvidedContext,
+                    resolveNestDependency,
+                    attachToReqObject,
+                    resetDiSubtree,
+                };
+            },
+        })(req, res);
+    };
 }

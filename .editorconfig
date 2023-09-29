@@ -1,0 +1,12 @@
+root = true
+[package.json]
+indent_style = space
+indent_size = 2
+
+[.prettierrc.json]
+printWidth = 140
+indent_style = space
+indent_size =4 
+
+[*]
+insert_final_newline = true
