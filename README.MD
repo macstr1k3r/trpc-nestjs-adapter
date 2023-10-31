@@ -12,7 +12,7 @@ Both __queries__ and __mutations__ work.
 
 I __haven't__ tested subscriptions yet.
 
-Batching __doesn't__ work. Currently it't not possible to create multiple requests from 1 single HTTP request in Nest.JS (or it's a skill issue :) )
+Batching __doesn't__ work. Currently, it's not possible to create multiple requests from 1 single HTTP request in Nest.JS (or it's a skill issue :) )
 
 ## How
 
